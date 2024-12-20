@@ -7,10 +7,11 @@ namespace BookStore.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Name is required")]
+        [MaxLength(40)]
         public string Name { get; set; }
 
-
+        [Range(1,100)]
         public int DisplayOrder { get; set; }
     }
 }
