@@ -3,8 +3,9 @@ using BookStore.DataAccess.Repository.IRepository;
 using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookStore.Controllers
+namespace BookStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -29,7 +30,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if(obj.Name == obj.DisplayOrder.ToString())
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name");
             }
@@ -37,20 +38,20 @@ namespace BookStore.Controllers
             {
                 _unitOfWork.Category.Add(obj);
                 _unitOfWork.save();
-                TempData["success"]= "Category created successfully";
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-          return View();
+            return View();
         }
 
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
             Category category = _unitOfWork.Category.Get(u => u.Id == id);
-            if(category == null)
+            if (category == null)
             {
                 return NotFound();
             }
@@ -88,7 +89,8 @@ namespace BookStore.Controllers
         public IActionResult DeletePost(int? id)
         {
             Category category = _unitOfWork.Category.Get(u => u.Id == id);
-            if (category == null) {
+            if (category == null)
+            {
                 return NotFound();
             }
             _unitOfWork.Category.Remove(category);
