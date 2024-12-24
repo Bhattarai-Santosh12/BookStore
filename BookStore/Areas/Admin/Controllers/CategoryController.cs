@@ -16,8 +16,6 @@ namespace BookStore.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
-
-
             return View(objCategoryList);
         }
 
