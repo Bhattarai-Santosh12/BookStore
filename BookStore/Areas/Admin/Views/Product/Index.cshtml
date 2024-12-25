@@ -12,7 +12,6 @@
     <div class="card-body p-4">
         <div class="container mb-2">
             <div class="row pt-4 mb-4">
-
                 <div class="col-12 text-end">
                     <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
                         Create New Product
@@ -21,43 +20,47 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped mb-3">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    @* <th>Description</th> *@
-                    <th>ISBN</th>
-                    <th>Author</th>
-                    <th>List Price</th>
-                    <th>Price</th>
-                    <th>Price50</th>
-                    <th>Price100</th>
-                    
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.OrderBy(x => x.Id))
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mb-3">
+                <thead>
                     <tr>
-                        <td>@item.Title</td>
-                        @* <td>@item.Description</td> *@
-                        <td>@item.ISBN</td>
-                        <td>@item.Author</td>
-                        <td>@item.ListPrice.ToString("C")</td>
-                        <td>@item.Price.ToString("C")</td>
-                        <td>@item.Price50.ToString("C")</td>
-                        <td>@item.Price100.ToString("C")</td>
-                        <td>
-                            <div class="w-75 btn-group">
-                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary m-lg-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger m-lg-2"> <i class="bi bi-trash"></i> Delete</a>
-                            </div>
-                        </td>
+                        <th>Title</th>
+                        @* <th>Description</th> *@
+                        <th>ISBN</th>
+                        <th>Author</th>
+                        <th>List Price</th>
+                        <th>Price</th>
+                        <th>Price50</th>
+                        <th>Price100</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderBy(x => x.Id))
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            @* <td>@item.Description</td> *@
+                            <td>@item.ISBN</td>
+                            <td>@item.Author</td>
+                            <td>@item.ListPrice.ToString("C")</td>
+                            <td>@item.Price.ToString("C")</td>
+                            <td>@item.Price50.ToString("C")</td>
+                            <td>@item.Price100.ToString("C")</td>
+                            <td>
+                                <div class="btn-group d-flex flex-wrap">
+                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-1 mb-1">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-1 mb-1">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
