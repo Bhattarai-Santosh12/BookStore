@@ -30,9 +30,9 @@
                         <th>Author</th>
                         <th>List Price</th>
                         <th>Price</th>
-                        <th>Price50</th>
-                        <th>Price100</th>
-                        <th>Actions</th>
+                        <th>Category</th>
+                         @* <th>Price100</th>
+                         <th>Actions</th> *@
                     </tr>
                 </thead>
                 <tbody>
@@ -45,8 +45,9 @@
                             <td>@item.Author</td>
                             <td>@item.ListPrice.ToString("C")</td>
                             <td>@item.Price.ToString("C")</td>
-                            <td>@item.Price50.ToString("C")</td>
-                            <td>@item.Price100.ToString("C")</td>
+                            @* <td>@item.Price50.ToString("C")</td>
+                            <td>@item.Price100.ToString("C")</td> *@
+                            <td>@item.CategoryId</td>
                             <td>
                                 <div class="btn-group d-flex flex-wrap">
                                     <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-1 mb-1">
