@@ -1,17 +1,17 @@
 ﻿@using BookStore.Models.Models
 @model List<Product>
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient text-white">
+<div class="card shadow-lg border-0 mt-4">
+    <div class="card-header bg-secondary text-white">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Product List</h2>
+                <h2 class="text-white py-3">Product List</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-        <div class="container mb-2">
-            <div class="row pt-4 mb-4">
+        <div class="container mb-4">
+            <div class="row">
                 <div class="col-12 text-end">
                     <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
                         Create New Product
@@ -20,48 +20,26 @@
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped mb-3">
-                <thead>
+        <div class="table-responsive mb-4">
+            <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                <thead class="table-light">
                     <tr>
                         <th>Title</th>
                         @* <th>Description</th> *@
                         <th>ISBN</th>
-                        <th>Author</th>
                         <th>List Price</th>
-                        <th>Price</th>
+                        <th>Author</th>
                         <th>Category</th>
-                         @* <th>Price100</th>
-                         <th>Actions</th> *@
+                        <th></th>
+                        @* <th>Price100</th>
+                        <th>Actions</th> *@
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model.OrderBy(x => x.Id))
-                    {
-                        <tr>
-                            <td>@item.Title</td>
-                            @* <td>@item.Description</td> *@
-                            <td>@item.ISBN</td>
-                            <td>@item.Author</td>
-                            <td>@item.ListPrice.ToString("C")</td>
-                            <td>@item.Price.ToString("C")</td>
-                            @* <td>@item.Price50.ToString("C")</td>
-                            <td>@item.Price100.ToString("C")</td> *@
-                            <td>@item.CategoryId</td>
-                            <td>
-                                <div class="btn-group d-flex flex-wrap">
-                                    <a asp-controller="Product" asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-primary mx-1 mb-1">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-1 mb-1">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/product.js" type="text/javascript"></script>
+}
