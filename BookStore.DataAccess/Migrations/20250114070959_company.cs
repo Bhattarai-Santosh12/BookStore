@@ -5,7 +5,7 @@
 namespace BookStore.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addingimageUrl : Migration
+    public partial class company : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

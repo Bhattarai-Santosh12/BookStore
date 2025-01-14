@@ -15,8 +15,8 @@ namespace BookStore.Data
 
         public DbSet <Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ApplicationUser> ApplicationUser {  get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,11 @@ namespace BookStore.Data
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+                );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 6, Name = "Tech Solution", StreetAddress = "123 Tech St", City = "Tech City", State = "IL", PostalCode = "12345", PhoneNumber = "1234567890" },
+                new Company { Id = 7, Name = "Tech Solution 2", StreetAddress = "123 Tech St", City = "Tech City", State = "IL", PostalCode = "12345", PhoneNumber = "1234567890" }
                 );
 
             modelBuilder.Entity<Product>().HasData(

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BookStore.Models.Models.Company>
+
+<div class="card shadow-lg border-0 mt-4">
+    <div class="card-header bg-secondary text-white">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-3">Company List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12 text-end">
+                    <a asp-controller="Company" asp-action="Upsert" class="btn btn-primary">
+                        Create New Company
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mb-4">
+            <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.StreetAddress</td>
+                            <td>@item.City</td>
+                            <td>@item.State</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>
+                                <a asp-controller="Company" asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-primary">
+                                    Edit
+                                </a>
+                                <button class="btn btn-danger" onclick="deleteCompany(@item.Id)">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+ @section Scripts {
+     <script src="~/js/Company.js" type="text/javascript"></script>
+ }

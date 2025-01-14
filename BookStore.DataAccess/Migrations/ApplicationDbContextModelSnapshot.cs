@@ -86,6 +86,28 @@ namespace BookStore.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 6,
+                            City = "Tech City",
+                            Name = "Tech Solution",
+                            PhoneNumber = "1234567890",
+                            PostalCode = "12345",
+                            State = "IL",
+                            StreetAddress = "123 Tech St"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            City = "Tech City",
+                            Name = "Tech Solution 2",
+                            PhoneNumber = "1234567890",
+                            PostalCode = "12345",
+                            State = "IL",
+                            StreetAddress = "123 Tech St"
+                        });
                 });
 
             modelBuilder.Entity("BookStore.Models.Models.Product", b =>
@@ -110,6 +132,7 @@ namespace BookStore.DataAccess.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double>("ListPrice")
@@ -429,6 +452,9 @@ namespace BookStore.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -441,6 +467,8 @@ namespace BookStore.DataAccess.Migrations
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("longtext");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -505,6 +533,15 @@ namespace BookStore.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BookStore.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("BookStore.Models.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }
