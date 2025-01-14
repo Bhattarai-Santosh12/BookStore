@@ -15,19 +15,19 @@ namespace BookStore.DataAccess.Repository
         public ICategoryRepository Category { get; set; }
         public IProductRepository Product { get; set; }
         public ICompanyRepository Company { get; set; }
+        public IApplicationUserRepository ApplicationUser { get; set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
           Category = new CategoryRepository(_db);
           Product = new ProductRepository(_db);
           Company= new CompanyRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
         
         public void save()
         {
            _db.SaveChanges();
         }
-
-
     }
 }
