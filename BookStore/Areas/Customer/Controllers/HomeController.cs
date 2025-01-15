@@ -45,7 +45,18 @@ namespace BookStore.Areas.Customer.Controllers
            var claimIdentity = (ClaimsIdentity)User.Identity;
             var userId=claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
           shoppingCart.ApplicationUserId = userId;
-           _unitOfWork.ShoppingCart.Add(shoppingCart);
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+            u.ProductId== shoppingCart.ProductId);
+            if (cartFromDb != null)
+            {
+                cartFromDb.Count += cartFromDb.Count;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
             _unitOfWork.save();
            return RedirectToAction("Index");
         }
