@@ -2,7 +2,7 @@
 
 namespace BookStore.DataAccess.Repository.IRepository
 {
-    public interface IShopingCartRepository : IRepository<ShoppingCart>
+    public interface IShoppingCartRepository : IRepository<ShoppingCart>
     {
         void Update(ShoppingCart obj);
     }
