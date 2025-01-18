@@ -40,6 +40,39 @@ namespace BookStore.Areas.Customer.Controllers
 
             return View(ShoppingCartVM);
         }
+        public IActionResult Plus(int cartId)
+        {
+            var cart = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            cart.Count += 1;
+            _unitOfWork.ShoppingCart.Update(cart);
+            _unitOfWork.save();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Minus(int cartId)
+        {
+            var cart = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            if (cart.Count <= 1)
+            {
+                _unitOfWork.ShoppingCart.Remove(cart);
+                _unitOfWork.save();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                cart.Count -= 1;
+                _unitOfWork.ShoppingCart.Update(cart);
+            }
+           
+            _unitOfWork.save();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Remove(int cartId)
+        {
+            var cart = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            _unitOfWork.ShoppingCart.Remove(cart);
+            _unitOfWork.save();
+            return RedirectToAction(nameof(Index));
+        }
 
         private double GetPriceBesedOnQuantity(ShoppingCart shoppingCart)
         {
