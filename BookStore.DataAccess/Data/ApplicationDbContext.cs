@@ -17,7 +17,7 @@ namespace BookStore.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ShoppingCart> ShopingCarts { get; set; }
-        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderHeader> OrderHeader { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ApplicationUser> ApplicationUser {  get; set; }
 
